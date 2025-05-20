@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="Commands\" />
+    <Folder Include="Models\Views\" />
     <Folder Include="Querys\" />
   </ItemGroup>
 
