@@ -1,8 +1,8 @@
 ﻿using Domain.Models;
 
-namespace Domain.Repository
+namespace Domain.Interfaces
 {
-    public interface ICrudRepository
+    public interface IRepository<T> where T : class
     {
         Task<IEnumerable<User>> GetAllAsync();
         Task<User?> GetByIdAsync(long id);

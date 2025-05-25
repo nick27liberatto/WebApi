@@ -1,4 +1,5 @@
-﻿using Infrastructure.Context;
+﻿using Domain.Mapping;
+using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api
@@ -20,6 +21,9 @@ namespace Api
             services.AddDbContext<OracleContext>(options =>
                 options.UseOracle(Configuration.GetConnectionString("OracleConnection")));
 
+            //AutoMapper
+            services.AddAutoMapper(typeof(CrudMapper).Assembly);
+            
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }

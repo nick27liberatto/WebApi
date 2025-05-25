@@ -1,6 +1,6 @@
 ﻿namespace Domain.Enums
 {
-    public enum StatusEnum
+    public enum StatusUserEnum
     {
         Undefined = 0,
         Working = 1,

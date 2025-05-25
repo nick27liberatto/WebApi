@@ -1,4 +1,5 @@
 ﻿using Domain.Commands;
+using Domain.Dto.Request;
 using Domain.Models;
 using Domain.Queries;
 using MediatR;
@@ -46,7 +47,8 @@ public class CrudController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(long Id, UpdateElementCommand command, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command.Id = Id);
+        command.Id = Id;
+        var result = await _mediator.Send(command);
         return Ok(result);
     }
 

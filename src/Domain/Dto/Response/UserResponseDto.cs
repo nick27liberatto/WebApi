@@ -1,13 +1,13 @@
 ﻿using Domain.Enums;
 
-namespace Domain.Models
+namespace Domain.Dto.Response
 {
-    public class User
+    public class UserResponseDto
     {
         public long Id { get; set; }
         public string Username { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public StatusUserEnum Status { get; set; }
+        public string Status { get; set; }
     }
 }

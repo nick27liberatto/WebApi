@@ -1,8 +1,8 @@
 ﻿using Domain.Enums;
 
-namespace Domain.Models
+namespace Domain.Dto.Request
 {
-    public class User
+    public class UserRequestDto
     {
         public long Id { get; set; }
         public string Username { get; set; }
