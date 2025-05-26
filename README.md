@@ -50,5 +50,3 @@ This project is a robust ASP.NET Core Web API built following Clean Architecture
 2. Run database migrations using EF Core tools (Code First)  
 3. Build and run the API project  
 4. Access API documentation via Swagger UI  
-
----
