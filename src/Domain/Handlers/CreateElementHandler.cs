@@ -18,7 +18,7 @@ namespace Domain.Handlers
         }
         public async Task<UserResponseDto> Handle(CreateElementCommand request, CancellationToken cancellationToken)
         {
-            return await CreateElement(request);z
+            return await CreateElement(request);
         }
         public async Task<UserResponseDto> CreateElement(CreateElementCommand request)
         {

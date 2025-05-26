@@ -18,8 +18,8 @@ namespace Api
             services.AddControllers();
 
             //Database Context
-            services.AddDbContext<OracleContext>(options =>
-                options.UseOracle(Configuration.GetConnectionString("OracleConnection")));
+            services.AddDbContext<OracleContext>(opt =>
+            opt.UseOracle(Configuration.GetConnectionString("OracleConnection")));
 
             //AutoMapper
             services.AddAutoMapper(typeof(CrudMapper).Assembly);

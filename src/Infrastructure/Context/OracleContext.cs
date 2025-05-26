@@ -1,22 +1,20 @@
 ﻿using Domain.Models;
+using Infrastructure.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
 {
     public class OracleContext : DbContext
     {
-        public readonly OracleOptions _options;
-        public OracleContext(
-            DbContextOptions<OracleContext> options, 
-            OracleOptions oracleOptions)
-            : base(options) { _options = oracleOptions; }
+        public OracleContext(DbContextOptions<OracleContext> options)
+            : base(options) {}
         
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseOracle(_options.ConnectionString);
-            base.OnConfiguring(optionsBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserMapping).Assembly);
+            base.OnModelCreating(modelBuilder);
         }
 
     }
