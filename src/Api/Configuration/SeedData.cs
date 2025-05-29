@@ -10,13 +10,13 @@ namespace Api.Configuration
         {
             context.Database.EnsureCreated();
 
-            // Se já houver dados, não faz nada
+            //If already has data, doesn't initiate
             if (context.Entities.Any()) return;
 
-            // Adiciona dados iniciais
+            // Initial data
             context.Entities.AddRange(
-                new Entity { Name = "Ellie", Password = "imune1234", Text = "sou um personagem de tlou nova", StaticStatus = EntityEnum.Active},
-                new Entity { Name = "Joel", Password = "ellie1234", Text = "sou um personagem de tlou velho", StaticStatus = EntityEnum.Inactive  }
+                new Entity { Name = "Ellie", Password = "immune1234", Text = "i cant turn into a zombie", StaticStatus = EntityEnum.Active},
+                new Entity { Name = "Joel", Password = "ellie1234", Text = "something pretty funny happens in part two", StaticStatus = EntityEnum.Inactive  }
             );
 
             context.SaveChanges();

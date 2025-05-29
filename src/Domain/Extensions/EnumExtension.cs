@@ -15,7 +15,7 @@
                 return attr?.Name ?? enumValue.ToString();
             }
 
-            return enumValue.ToString(); // fallback seguro
+            return enumValue.ToString();
         }
     }
 

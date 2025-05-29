@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Commands;
 using Domain.Dto.Request;
-using Domain.Dto.Response;
 using Domain.Interfaces;
 using Domain.Models;
 using MediatR;

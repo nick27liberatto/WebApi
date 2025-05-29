@@ -11,8 +11,8 @@ namespace Api.Configuration
             try
             {
                 var context = services.GetRequiredService<OracleContext>();
-                // context.Database.Migrate(); // aplicar migrations automaticamente
-                //SeedData.Initialize(context); // adicionar dados fictícios
+                // context.Database.Migrate(); // Apply migrations
+                //SeedData.Initialize(context); // Add data for testing
             }
             catch (Exception ex)
             {

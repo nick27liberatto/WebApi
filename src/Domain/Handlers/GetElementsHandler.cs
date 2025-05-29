@@ -4,7 +4,6 @@ using AutoMapper;
 using MediatR;
 using Domain.Queries;
 using Domain.Dto.Response;
-using System.Linq.Expressions;
 
 namespace Domain.Handlers
 {
