@@ -12,7 +12,7 @@ namespace Api.Configuration
             {
                 var context = services.GetRequiredService<OracleContext>();
                 // context.Database.Migrate(); // aplicar migrations automaticamente
-                SeedData.Initialize(context);
+                //SeedData.Initialize(context); // adicionar dados fictícios
             }
             catch (Exception ex)
             {

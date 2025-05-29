@@ -1,35 +1,29 @@
-﻿using AutoMapper;
-using Domain.Commands;
-using Domain.Dto.Response;
-using Domain.Interfaces;
-using Domain.Models;
-using MediatR;
-
-namespace Domain.Handlers
+﻿namespace Domain.Handlers
 {
-    public class CreateElementHandler : IRequestHandler<CreateElementCommand, UserResponseDto>
+    using AutoMapper;
+    using Commands;
+    using Interfaces;
+    using Models;
+    using MediatR;
+    using Domain.Dto.Request;
+    using Domain.Enums;
+
+    public class CreateElementHandler : IRequestHandler<CreateElementCommand, EntityRequestDto>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IRepository<Entity> _repository;
         private readonly IMapper _mapper;
-        public CreateElementHandler(IRepository<User> repository, IMapper mapper)
+        public CreateElementHandler(IRepository<Entity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<UserResponseDto> Handle(CreateElementCommand request, CancellationToken cancellationToken)
+        public async Task<EntityRequestDto> Handle(CreateElementCommand request, CancellationToken cancellationToken)
         {
-            return await CreateElement(request);
-        }
-        public async Task<UserResponseDto> CreateElement(CreateElementCommand request)
-        {
-            var exists = _repository.GetByIdAsync(request.Id);
-            if (exists != null)
-            {
-                throw new Exception("Element already exists.");
-            }
-            var user = _mapper.Map<User>(request);
-            await _repository.AddAsync(user);
-            return _mapper.Map<UserResponseDto>(user);
+            var entity = _mapper.Map<Entity>(request);
+            if (request.StaticStatus.HasValue && !Enum.IsDefined(typeof(EntityEnum), request.StaticStatus.Value))
+                throw new ArgumentOutOfRangeException(nameof(request.StaticStatus), "Invalid value for StaticStatus");
+            await _repository.AddAsync(entity);
+            return _mapper.Map<EntityRequestDto>(entity);
         }
     }
 }

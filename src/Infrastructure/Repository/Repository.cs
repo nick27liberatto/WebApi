@@ -13,35 +13,35 @@ namespace Infrastructure.Repository
             _context = context;
         }
 
-        public async Task AddAsync(User user)
+        public async Task AddAsync(Entity entity)
         {
-            _context.Users.Add(user);
+            _context.Entities.Add(entity);
             await  _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(long id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            var entity = await _context.Entities.FindAsync(id);
+            if (entity != null)
             {
-                _context.Users.Remove(user);
+                _context.Entities.Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<Entity>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Entities.ToListAsync();
         }
 
-        public async Task<User?> GetByIdAsync(long id)
+        public async Task<Entity?> GetByIdAsync(long id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Entities.FindAsync(id);
         }
 
-        public async Task UpdateAsync(User user)
+        public async Task UpdateAsync(Entity entity)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
     }

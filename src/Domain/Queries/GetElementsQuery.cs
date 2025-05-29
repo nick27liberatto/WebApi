@@ -1,9 +1,12 @@
-﻿using Domain.Dto.Response;
-using MediatR;
-
-namespace Domain.Queries
+﻿namespace Domain.Queries
 {
-    public class GetElementsQuery : IRequest<IEnumerable<UserResponseDto>>
+    using Domain.Enums;
+    using Dto.Response;
+    using MediatR;
+
+    public class GetElementsQuery : IRequest<IEnumerable<EntityResponseDto>>
     {
+        public string? Search { get; set; }
+        public EntityEnum? Status { get; set; }
     }
 }

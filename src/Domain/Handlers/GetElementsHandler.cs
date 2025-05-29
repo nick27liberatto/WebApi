@@ -4,29 +4,41 @@ using AutoMapper;
 using MediatR;
 using Domain.Queries;
 using Domain.Dto.Response;
+using System.Linq.Expressions;
 
 namespace Domain.Handlers
 {
-    public class GetElementsHandler : IRequestHandler<GetElementsQuery, IEnumerable<UserResponseDto>>
+    public class GetElementsHandler : IRequestHandler<GetElementsQuery, IEnumerable<EntityResponseDto>>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IRepository<Entity> _repository;
         private readonly IMapper _mapper;
 
-        public GetElementsHandler(IRepository<User> repository, IMapper mapper)
+        public GetElementsHandler(IRepository<Entity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<UserResponseDto>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<EntityResponseDto>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
         {
-            return await GetElements(request);
-        }
+            var entities = await _repository.GetAllAsync();
 
-        public async Task<IEnumerable<UserResponseDto>> GetElements(GetElementsQuery request)
-        {
-            var users = await _repository.GetAllAsync();
-            return _mapper.Map<IEnumerable<UserResponseDto>>(users);
+            if (request.Status.HasValue)
+            {
+                entities = entities
+                    .Where(e => e.StaticStatus == request.Status)
+                    .ToList();
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Search))
+            {
+                entities = entities
+                    .Where(e =>
+                        (!string.IsNullOrEmpty(e.Name) && e.Name.Contains(request.Search, StringComparison.OrdinalIgnoreCase)) ||
+                        (!string.IsNullOrEmpty(e.Text) && e.Text.Contains(request.Search, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
+            return _mapper.Map<IEnumerable<EntityResponseDto>>(entities);
         }
     }
 }

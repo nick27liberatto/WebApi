@@ -8,31 +8,24 @@ using MediatR;
 
 namespace Domain.Handlers
 {
-    public class UpdateElementHandler : IRequestHandler<UpdateElementCommand, UserResponseDto>
+    public class UpdateElementHandler : IRequestHandler<UpdateElementCommand, EntityRequestDto>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IRepository<Entity> _repository;
         private readonly IMapper _mapper;
 
-        public UpdateElementHandler(IRepository<User> repository, IMapper mapper)
+        public UpdateElementHandler(IRepository<Entity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<UserResponseDto> Handle(UpdateElementCommand request, CancellationToken cancellationToken)
+        public async Task<EntityRequestDto> Handle(UpdateElementCommand request, CancellationToken cancellationToken)
         {
-            return await UpdateElement(request);
-        }
-
-        public async Task<UserResponseDto> UpdateElement(UpdateElementCommand request)
-        {
-            var user = await _repository.GetByIdAsync(request.Id);
-            if (user == null)
-            {
-                throw new Exception("Element does not exist.");
-            }
-            _mapper.Map(request, user);
-            await _repository.UpdateAsync(user);
-            return _mapper.Map<UserResponseDto>(user);
+            var entity = await _repository.GetByIdAsync(request.Id);
+            if (entity == null) return null;
+            
+            _mapper.Map(request, entity);
+            await _repository.UpdateAsync(entity);
+            return _mapper.Map<EntityRequestDto>(entity);
         }
     }
 }

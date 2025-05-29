@@ -1,9 +1,9 @@
-﻿using Domain.Dto.Response;
-using MediatR;
-
-namespace Domain.Queries
+﻿namespace Domain.Queries
 {
-    public class GetElementByIdQuery : IRequest<UserResponseDto>
+    using Domain.Dto.Response;
+    using MediatR;
+
+    public class GetElementByIdQuery : IRequest<EntityResponseDto>
     {
         public long Id { get; set; }
     }

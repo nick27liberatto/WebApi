@@ -4,10 +4,10 @@ namespace Domain.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<User>> GetAllAsync();
-        Task<User?> GetByIdAsync(long id);
-        Task AddAsync(User user);
-        Task UpdateAsync(User user);
+        Task<IEnumerable<Entity>> GetAllAsync();
+        Task<Entity?> GetByIdAsync(long id);
+        Task AddAsync(Entity entity);
+        Task UpdateAsync(Entity entity);
         Task DeleteAsync(long id);
     }
 }

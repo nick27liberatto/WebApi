@@ -11,12 +11,12 @@ namespace Api.Configuration
             context.Database.EnsureCreated();
 
             // Se já houver dados, não faz nada
-            if (context.Users.Any()) return;
+            if (context.Entities.Any()) return;
 
             // Adiciona dados iniciais
-            context.Users.AddRange(
-                new User { Username = "admin01", Name = "Admin Teste", Email = "admin@example.com", Password = "12345", Status = StatusUserEnum.Working },
-                new User { Username = "user01", Name = "Usuario Teste", Email = "user@example.com", Password = "Queijo123", Status = StatusUserEnum.Sleeping  }
+            context.Entities.AddRange(
+                new Entity { Name = "Ellie", Password = "imune1234", Text = "sou um personagem de tlou nova", StaticStatus = EntityEnum.Active},
+                new Entity { Name = "Joel", Password = "ellie1234", Text = "sou um personagem de tlou velho", StaticStatus = EntityEnum.Inactive  }
             );
 
             context.SaveChanges();

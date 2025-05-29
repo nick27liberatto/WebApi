@@ -1,9 +1,8 @@
-﻿namespace Domain.Commands
+﻿using Domain.Enums;
+
+namespace Domain.Dto.Request
 {
-    using Domain.Dto.Request;
-    using Domain.Enums;
-    using MediatR;
-    public class CreateElementCommand : IRequest<EntityRequestDto>
+    public class EntityRequestDto
     {
         public string Name { get; set; }
         public string Password { get; set; }
