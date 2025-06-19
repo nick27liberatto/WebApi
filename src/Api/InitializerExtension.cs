@@ -10,11 +10,16 @@ using Microsoft.OpenApi.Models;
 
 public class InitializerExtension
 {
-    public static void Initialize(WebApplicationBuilder builder, WebApplication app)
+    public static WebApplication Initialize(WebApplicationBuilder builder)
     {
         ConfigureServices(builder);
+
+        var app = builder.Build();
+
         ConfigureMiddleWare(app);
         SeedDatabase(app);
+
+        return app;
     }
 
     public static void ConfigureServices(WebApplicationBuilder builder)
@@ -22,7 +27,7 @@ public class InitializerExtension
         builder.Services.AddControllers();
 
         builder.Services.AddDbContext<OracleContext>(opt =>
-            opt.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
+            opt.UseOracle(builder.Configuration.GetConnectionString("Oracle")));
 
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(UpdateElementHandler).Assembly));
@@ -39,7 +44,7 @@ public class InitializerExtension
             {
                 Title = "API",
                 Version = "v1",
-                Description = "API built with Clean Architecture, CQRS and .NET 9",
+                Description = "API built with Clean Architecture, CQRS and .NET 6",
                 Contact = new OpenApiContact
                 {
                     Name = "Nicolas Liberatto",
@@ -68,7 +73,7 @@ public class InitializerExtension
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-                c.RoutePrefix = string.Empty; // Swagger na raiz
+                c.RoutePrefix = string.Empty;
             });
         }
         app.UseHttpsRedirection();

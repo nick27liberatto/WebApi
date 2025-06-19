@@ -16,8 +16,6 @@ public class EntityController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(Entity), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAll([FromQuery] GetElementsQuery request)
     {
         var result = await _mediator.Send(request);
@@ -25,8 +23,6 @@ public class EntityController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(Entity), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get([FromRoute] long id)
     {
         var result = await _mediator.Send(new GetElementByIdQuery { Id = id });
