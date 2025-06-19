@@ -2,7 +2,7 @@
 using Infrastructure.Context;
 using Domain.Enums;
 
-namespace Api.Configuration
+namespace Api
 {
     public static class SeedData
     {
