@@ -1,10 +1,8 @@
-﻿using Domain.Enums;
-
-namespace Domain.Dto.Response
+﻿namespace Application.Dto.Response
 {
-    public class EntityResponseDto
+    public class ElementResponseDto
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string? Text { get; set; }
         public string? Status { get; set; }

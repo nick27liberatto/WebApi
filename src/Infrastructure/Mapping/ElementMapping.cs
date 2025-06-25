@@ -4,11 +4,11 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class EntityMapping : IEntityTypeConfiguration<Entity>
+    public class ElementMapping : IEntityTypeConfiguration<Element>
     {
-        public void Configure(EntityTypeBuilder<Entity> builder)
+        public void Configure(EntityTypeBuilder<Element> builder)
         {
-            builder.ToTable("ENTITIES");
+            builder.ToTable("ELEMENTS");
 
             builder.HasKey(p => p.Id);
             builder.Property(_ => _.Name).IsRequired(true);

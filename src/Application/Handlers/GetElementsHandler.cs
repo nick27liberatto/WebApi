@@ -1,24 +1,24 @@
-﻿using Domain.Models;
-using Domain.Interfaces;
-using AutoMapper;
-using MediatR;
-using Domain.Queries;
-using Domain.Dto.Response;
-
-namespace Domain.Handlers
+﻿namespace Application.Handlers
 {
-    public class GetElementsHandler : IRequestHandler<GetElementsQuery, IEnumerable<EntityResponseDto>>
+    using Application.Dto.Response;
+    using Application.Queries;
+    using AutoMapper;
+    using Domain.Interfaces;
+    using Domain.Models;
+    using MediatR;
+
+    public class GetElementsHandler : IRequestHandler<GetElementsQuery, IEnumerable<ElementResponseDto>>
     {
-        private readonly IRepository<Entity> _repository;
+        private readonly IRepository<Element> _repository;
         private readonly IMapper _mapper;
 
-        public GetElementsHandler(IRepository<Entity> repository, IMapper mapper)
+        public GetElementsHandler(IRepository<Element> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<EntityResponseDto>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ElementResponseDto>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
         {
             var entities = await _repository.GetAllAsync();
 
@@ -37,7 +37,7 @@ namespace Domain.Handlers
                         (!string.IsNullOrEmpty(e.Text) && e.Text.Contains(request.Search, StringComparison.OrdinalIgnoreCase)))
                     .ToList();
             }
-            return _mapper.Map<IEnumerable<EntityResponseDto>>(entities);
+            return _mapper.Map<IEnumerable<ElementResponseDto>>(entities);
         }
     }
 }

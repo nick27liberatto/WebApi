@@ -1,8 +1,8 @@
 ﻿namespace Api;
 
-using Domain.Handlers;
+using Application.Handlers;
+using Application.Mapping;
 using Domain.Interfaces;
-using Domain.Mapping;
 using Infrastructure.Context;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +32,7 @@ public class InitializerExtension
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(typeof(UpdateElementHandler).Assembly));
 
-        builder.Services.AddAutoMapper(typeof(EntityProfile).Assembly);
+        builder.Services.AddAutoMapper(typeof(ElementProfile).Assembly);
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -73,7 +73,6 @@ public class InitializerExtension
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-                c.RoutePrefix = string.Empty;
             });
         }
         app.UseHttpsRedirection();

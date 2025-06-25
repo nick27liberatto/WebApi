@@ -9,11 +9,11 @@ namespace Infrastructure.Context
         public OracleContext(DbContextOptions<OracleContext> options)
             : base(options) {}
         
-        public DbSet<Entity> Entities { get; set; }
+        public DbSet<Element> Elements { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EntityMapping).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ElementMapping).Assembly);
             base.OnModelCreating(modelBuilder);
         }
 

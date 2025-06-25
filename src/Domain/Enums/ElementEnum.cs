@@ -2,7 +2,7 @@
 
 namespace Domain.Enums
 {
-    public enum EntityEnum
+    public enum ElementEnum
     {
         [Display(Name = "Inactive")]
         Inactive = 0,
