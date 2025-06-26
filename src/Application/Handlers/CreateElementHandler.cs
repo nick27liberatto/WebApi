@@ -21,8 +21,8 @@
         public async Task<ElementResponseDto> Handle(CreateElementCommand request, CancellationToken cancellationToken)
         {
             var element = _mapper.Map<Element>(request);
-            if (request.StaticStatus.HasValue && !Enum.IsDefined(typeof(ElementEnum), request.StaticStatus.Value))
-                throw new ArgumentOutOfRangeException(nameof(request.StaticStatus), "Invalid value for StaticStatus");
+            if (request.Status.HasValue && !Enum.IsDefined(typeof(ElementEnum), request.Status.Value))
+                throw new ArgumentOutOfRangeException(nameof(request.Status), "Invalid value for StaticStatus");
             await _repository.AddAsync(element);
             return _mapper.Map<ElementResponseDto>(element);
         }

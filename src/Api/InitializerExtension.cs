@@ -2,11 +2,13 @@
 
 using Application.Handlers;
 using Application.Mapping;
+using Application.Validators;
 using Domain.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using FluentValidation;
 
 public class InitializerExtension
 {
@@ -33,6 +35,8 @@ public class InitializerExtension
             cfg.RegisterServicesFromAssembly(typeof(UpdateElementHandler).Assembly));
 
         builder.Services.AddAutoMapper(typeof(ElementProfile).Assembly);
+
+        builder.Services.AddValidatorsFromAssembly(typeof(ElementRequestDtoValidator).Assembly);
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

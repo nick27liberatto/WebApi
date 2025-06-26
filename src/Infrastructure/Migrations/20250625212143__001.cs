@@ -4,7 +4,7 @@
 
 namespace Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class _001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,16 +12,16 @@ namespace Infrastructure.Migrations
                 name: "ELEMENTS",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    ID_ELEMENTS = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
-                    Name = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Password = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Text = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
-                    StaticStatus = table.Column<int>(type: "NUMBER(10)", nullable: true)
+                    NAME = table.Column<string>(type: "NVARCHAR2(50)", maxLength: 50, nullable: false),
+                    PASSWORD = table.Column<string>(type: "NVARCHAR2(50)", maxLength: 50, nullable: false),
+                    TEXT = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: true),
+                    STATUS = table.Column<int>(type: "NUMBER(10)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ELEMENTS", x => x.Id);
+                    table.PrimaryKey("ID_ELEMENTS", x => x.ID_ELEMENTS);
                 });
         }
 

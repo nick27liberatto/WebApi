@@ -1,10 +1,9 @@
-﻿using Domain.Enums;
-
-namespace Domain.Models
+﻿namespace Application.Dto.Request.CommandDto
 {
-    public class Element
+    using Domain.Enums;
+
+    public class CreateElementDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public string? Text { get; set; }

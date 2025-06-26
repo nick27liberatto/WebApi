@@ -1,12 +1,9 @@
-﻿namespace Application.Commands
+﻿namespace Application.Dto.Request.CommandDto
 {
-    using Application.Dto.Response;
     using Domain.Enums;
-    using MediatR;
 
-    public class UpdateElementCommand : IRequest<ElementResponseDto>
+    public class UpdateElementDto
     {
-        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Password { get; set; }
         public string? Text { get; set; }

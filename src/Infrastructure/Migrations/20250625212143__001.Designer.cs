@@ -2,6 +2,7 @@
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -10,9 +11,10 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(OracleContext))]
-    partial class OracleContextModelSnapshot : ModelSnapshot
+    [Migration("20250625212143__001")]
+    partial class _001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)")
-                        .HasColumnName("ID_ELEMENT");
+                        .HasColumnName("ID_ELEMENTS");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -52,7 +54,7 @@ namespace Infrastructure.Migrations
                         .HasColumnName("TEXT");
 
                     b.HasKey("Id")
-                        .HasName("ID_ELEMENT");
+                        .HasName("ID_ELEMENTS");
 
                     b.ToTable("ELEMENTS", (string)null);
                 });

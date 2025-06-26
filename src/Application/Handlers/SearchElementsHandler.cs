@@ -7,25 +7,25 @@
     using Domain.Models;
     using MediatR;
 
-    public class GetElementsHandler : IRequestHandler<GetElementsQuery, IEnumerable<ElementResponseDto>>
+    public class SearchElementsHandler : IRequestHandler<SearchElementsQuery, IEnumerable<ElementResponseDto>>
     {
         private readonly IRepository<Element> _repository;
         private readonly IMapper _mapper;
 
-        public GetElementsHandler(IRepository<Element> repository, IMapper mapper)
+        public SearchElementsHandler(IRepository<Element> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ElementResponseDto>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ElementResponseDto>> Handle(SearchElementsQuery request, CancellationToken cancellationToken)
         {
             var entities = await _repository.GetAllAsync();
 
             if (request.Status.HasValue)
             {
                 entities = entities
-                    .Where(e => e.StaticStatus == request.Status)
+                    .Where(e => e.Status == request.Status)
                     .ToList();
             }
 

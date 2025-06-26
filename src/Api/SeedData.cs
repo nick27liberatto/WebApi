@@ -15,8 +15,8 @@ namespace Api
 
             // Initial data
             context.Elements.AddRange(
-                new Element { Name = "Ellie", Password = "immune1234", Text = "i cant turn into a zombie", StaticStatus = ElementEnum.Active},
-                new Element { Name = "Joel", Password = "ellie1234", Text = "something pretty funny happens in part two", StaticStatus = ElementEnum.Inactive  }
+                new Element { Name = "Ellie", Password = "immune1234", Text = "i cant turn into a zombie", Status = ElementEnum.Active},
+                new Element { Name = "Joel", Password = "ellie1234", Text = "something pretty funny happens in part two", Status = ElementEnum.Inactive  }
             );
 
             context.SaveChanges();

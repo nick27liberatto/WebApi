@@ -7,6 +7,8 @@
     using Application.Dto.Response;
     using Application.Commands;
     using Application.Queries;
+    using Application.Dto.Request.QueryDto;
+    using Application.Dto.Request.CommandDto;
 
     public class ElementProfile : Profile
     {
@@ -15,26 +17,23 @@
             //Entity to Response + Get Description from Enumerator
             CreateMap<Element, ElementResponseDto>()
             .ForMember(dest => dest.Status, opt =>
-                opt.MapFrom(src => src.StaticStatus.HasValue
-                    ? src.StaticStatus.Value.GetDisplayName()
+                opt.MapFrom(src => src.Status.HasValue
+                    ? src.Status.Value.GetDisplayName()
                     : null));
 
             //Entity to Request
             CreateMap<Element, ElementRequestDto>().ReverseMap();
 
+            //Dto to Command/Query
+            CreateMap<SearchElementsDto, SearchElementsQuery>();
+            CreateMap<CreateElementDto, CreateElementCommand>();
+            CreateMap<UpdateElementDto, UpdateElementCommand>();
+
             //Commands to Entity
             CreateMap<CreateElementCommand, Element>();
             CreateMap<UpdateElementCommand, Element>();
-            CreateMap<DeleteElementCommand, Element>();
 
-            //Commands to Dto
-            CreateMap<GetElementsRequestDto, GetElementsQuery>();
-            CreateMap<CreateElementCommand, ElementResponseDto>();
-            CreateMap<UpdateElementCommand, ElementRequestDto>().ReverseMap();
-            CreateMap<DeleteElementCommand, ElementRequestDto>();
 
-            //Dto to Commands
-            CreateMap<ElementRequestDto, CreateElementCommand>();
         }
     }
 }

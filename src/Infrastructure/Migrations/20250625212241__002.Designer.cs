@@ -11,8 +11,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(OracleContext))]
-    [Migration("20250625014218_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250625212241__002")]
+    partial class _002
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,25 +27,34 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("NUMBER(10)")
+                        .HasColumnName("ID_ELEMENT");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnName("NAME");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(50)
+                        .HasColumnType("NVARCHAR2(50)")
+                        .HasColumnName("PASSWORD");
 
-                    b.Property<int?>("StaticStatus")
-                        .HasColumnType("NUMBER(10)");
+                    b.Property<int?>("Status")
+                        .HasColumnType("NUMBER(10)")
+                        .HasColumnName("STATUS");
 
                     b.Property<string>("Text")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)")
+                        .HasColumnName("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("ID_ELEMENT");
 
                     b.ToTable("ELEMENTS", (string)null);
                 });

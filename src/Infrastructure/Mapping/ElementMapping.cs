@@ -9,12 +9,13 @@
         public void Configure(EntityTypeBuilder<Element> builder)
         {
             builder.ToTable("ELEMENTS");
+            builder.HasKey(p => p.Id).HasName("ID_ELEMENT");
 
-            builder.HasKey(p => p.Id);
-            builder.Property(_ => _.Name).IsRequired(true);
-            builder.Property(_ => _.Password).IsRequired(true);
-            builder.Property(_ => _.Text).IsRequired(false);
-            builder.Property(_ => _.StaticStatus).IsRequired(false);
+            builder.Property(e => e.Id).HasColumnName("ID_ELEMENT");
+            builder.Property(e => e.Name).HasColumnName("NAME").HasMaxLength(50).IsRequired(true);
+            builder.Property(e => e.Password).HasColumnName("PASSWORD").HasMaxLength(50).IsRequired(true);
+            builder.Property(e => e.Text).HasColumnName("TEXT").HasMaxLength(200).IsRequired(false);
+            builder.Property(e => e.Status).HasColumnName("STATUS").IsRequired(false);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Application.Commands;
 using Application.Dto.Request;
+using Application.Dto.Request.CommandDto;
+using Application.Dto.Request.QueryDto;
 using Application.Queries;
 using AutoMapper;
 using MediatR;
@@ -19,9 +21,9 @@ public class ElementController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetElementsRequestDto dto)
+    public async Task<IActionResult> GetAll([FromQuery] SearchElementsDto dto)
     {
-        var command = _mapper.Map<GetElementsQuery>(dto);
+        var command = _mapper.Map<SearchElementsQuery>(dto);
         var result = await _mediator.Send(command);
         return Ok(result);
     }
@@ -34,7 +36,7 @@ public class ElementController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ElementRequestDto dto)
+    public async Task<IActionResult> Create([FromBody] CreateElementDto dto)
     {
         var command = _mapper.Map<CreateElementCommand>(dto);
         var result = await _mediator.Send(command);
@@ -46,7 +48,7 @@ public class ElementController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] ElementRequestDto dto)
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateElementDto dto)
     {
         var command = _mapper.Map<UpdateElementCommand>(dto);
         command.Id = id;
