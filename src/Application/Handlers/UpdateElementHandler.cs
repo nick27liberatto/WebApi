@@ -22,7 +22,7 @@
         {
             var entity = await _repository.GetByIdAsync(request.Id);
             if (entity == null) return null;
-            
+
             _mapper.Map(request, entity);
             await _repository.UpdateAsync(entity);
             return _mapper.Map<ElementResponseDto>(entity);

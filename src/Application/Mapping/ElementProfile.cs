@@ -31,7 +31,8 @@
 
             //Commands to Entity
             CreateMap<CreateElementCommand, Element>();
-            CreateMap<UpdateElementCommand, Element>();
+            CreateMap<UpdateElementCommand, Element>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 
         }
